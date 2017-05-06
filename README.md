@@ -32,41 +32,74 @@ The following rules are available:
 
 ### no-unused-properties
 
-This rule enforces having the `readonly` modifier on all interface members.
+This rule enforces that the object passed to a tiny `.sql` call must have every property used inside the SQL file.
 
-You might think that using `const` would eliminate mutation from your TypeScript code. **Wrong.** Turns out that there's a pretty big loophole in `const`.
+This is typically an error because you _think_ that you are using that property, but you actually aren't.
+
+Given:
+
+```sql
+SELECT *
+FROM user
+WHERE user.name = :name
+```
+in `users.fetch`
 
 ```typescript
-interface Point { x: number, y: number }
-const point: Point = { x: 23, y: 44 };
-point.x = 99; // This is legal
+import { TinyPg } from 'tinypg'
+
+const db = new TinyPg({
+   connection_string: 'postgres://postgres@localhost:5432/mydb',
+   root_dir: __dirname + '/sql_files'
+})
+
+// NOT OK
+db.sql('users.fetch', {
+   name: 'Joe',
+   enabled: false,
+})
+
+//OK
+db.sql('users.fetch', {
+   name: 'Joe',
+})
 ```
 
-This is why the `readonly-interface` rule exists. This rule prevents you from assigning a value to the result of a member expression.
-
-```typescript
-interface Point { readonly x: number, readonly y: number }
-const point: Point = { x: 23, y: 44 };
-point.x = 99; // <- No object mutation allowed.
-```
-
-This rule is just as effective as using Object.freeze() to prevent mutations in your Redux reducers. However this rule has **no run-time cost**, and is enforced at **compile time**.  A good alternative to object mutation is to use the ES2016 object spread [syntax](https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#object-spread-and-rest) that was added in typescript 2.1:
-
-```typescript
-interface Point { readonly x: number, readonly y: number }
-const point: Point = { x: 23, y: 44 };
-const transformedPoint = { ...point, x: 99 };
-```
 
 ### no-missing-sql-file
 
-This rule enforces all indexers to have the readonly modifier.
+This rule enforces all tiny calls to `.sql` reference a valid SQL file.
+
+Given:
+
+```
+├── sql_files
+│   ├── fetch_user.sql
+│   └── users
+│       └── fetch.sql
+```
 
 ```typescript
+import { TinyPg } from 'tinypg'
+
+const db = new TinyPg({
+   connection_string: 'postgres://postgres@localhost:5432/mydb',
+   root_dir: __dirname + '/sql_files'
+})
+
 // NOT OK
-let foo: { [key:string]: number }; 
-// OK
-let foo: { readonly [key:string]: number }; 
+db.sql('users.create', {
+   name: 'Joe',
+})
+
+//OK
+db.sql('users.fetch', {
+   name: 'Joe',
+})
+
+db.sql('fetch_user', {
+   name: 'Joe',
+})
 ```
 
 ## Options
