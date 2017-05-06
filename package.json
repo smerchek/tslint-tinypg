@@ -19,9 +19,10 @@
   "homepage": "https://github.com/smerchek/tslint-tinypg#readme",
   "devDependencies": {
     "@types/lodash": "^4.14.64",
+    "@types/node": "^7.0.18",
     "shelljs": "^0.7.5",
     "tslint": "^5.1.0",
-    "typescript": "^2.2.2"
+    "typescript": "2.3.2"
   },
   "scripts": {
     "tsc": "tsc",
@@ -35,6 +36,7 @@
   },
   "dependencies": {
     "globby": "^6.1.0",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "tinypg": "^2.0.0-alpha.17"
   }
 }

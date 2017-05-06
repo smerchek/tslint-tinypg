@@ -4,6 +4,7 @@
     "forceConsistentCasingInFileNames": true,
     "newLine": "LF",
     "noEmitOnError": true,
+    "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
     "noImplicitReturns": true,
@@ -21,7 +22,14 @@
       "dom"
     ]
   },
-  "include": [
-    "src/*.ts"
-  ]
+  "filesGlob": [
+      "src/**/*.ts",
+      "typings/**/*.ts",
+      "!./node_modules/**/*.ts"
+   ],
+   "exclude": [
+      "node_modules",
+      ".vscode",
+      "release"
+   ]
 }
