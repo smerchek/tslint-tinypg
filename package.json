@@ -1,6 +1,6 @@
 {
   "name": "tslint-tinypg",
-  "version": "3.2.0",
+  "version": "1.0.0-alpha-0",
   "description": "TSLint rules to disable mutation in TypeScript.",
   "main": "index.js",
   "repository": {
@@ -9,10 +9,12 @@
   },
   "keywords": [
     "tslint",
-    "immutability"
+    "tinypg",
+    "postgres",
+    "sql"
   ],
-  "author": "Jonas Kello",
-  "license": "Apache-2.0",
+  "author": "Scott Smerchek",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/smerchek/tslint-tinypg/issues"
   },
