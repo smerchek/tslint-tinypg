@@ -1,0 +1,40 @@
+{
+  "name": "tslint-tinypg",
+  "version": "3.2.0",
+  "description": "TSLint rules to disable mutation in TypeScript.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smerchek/tslint-tinypg.git"
+  },
+  "keywords": [
+    "tslint",
+    "immutability"
+  ],
+  "author": "Jonas Kello",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/smerchek/tslint-tinypg/issues"
+  },
+  "homepage": "https://github.com/smerchek/tslint-tinypg#readme",
+  "devDependencies": {
+    "@types/lodash": "^4.14.64",
+    "shelljs": "^0.7.5",
+    "tslint": "^5.1.0",
+    "typescript": "^2.2.2"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "build": "rm -rf rules && tsc -p tsconfig.json",
+    "lint": "tslint './src/**/*.ts{,x}'",
+    "test": "yarn build && yarn test:rules",
+    "test:rules": "./scripts/test-rules.sh",
+    "publish:major": "npm run build && node scripts/publish.js major",
+    "publish:minor": "npm run build && node scripts/publish.js minor",
+    "publish:patch": "npm run build && node scripts/publish.js patch"
+  },
+  "dependencies": {
+    "globby": "^6.1.0",
+    "lodash": "^4.17.4"
+  }
+}
