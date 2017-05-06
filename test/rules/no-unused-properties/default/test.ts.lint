@@ -1,0 +1,28 @@
+import { TinyPg } from 'tinypg'
+
+const db = new TinyPg({
+   connection_string: 'postgres://postgres@localhost:5432/mydb',
+   root_dir: __dirname + '/sql_files'
+})
+
+db.sql('users.fetch', {
+   name: 'Joe',
+   unused_property: 'test',
+   ~~~~~~~~~~~~~~~~~~~~~~~ [unused-property-1]
+})
+
+db.sql('users.fetch', {
+   name: 'Joe',
+   unused_property: 'test',
+   ~~~~~~~~~~~~~~~~~~~~~~~ [unused-property-1]
+   second_property: 'test',
+   ~~~~~~~~~~~~~~~~~~~~~~~ [unused-property-2]
+})
+
+db.sql('fetch_user', {
+   name: 'Joe',
+})
+
+
+[unused-property-1]: Property [unused_property] does not exist in sql call [users.fetch].
+[unused-property-2]: Property [second_property] does not exist in sql call [users.fetch].

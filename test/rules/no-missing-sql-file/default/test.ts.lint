@@ -1,0 +1,28 @@
+import { TinyPg } from 'tinypg'
+
+const db = new TinyPg({
+   connection_string: 'postgres://postgres@localhost:5432/mydb',
+   root_dir: __dirname + '/sql_files'
+})
+
+db.sql('fetch_user_by_name', {
+       ~~~~~~~~~~~~~~~~~~~~ [missing-sql-file-1]
+   name: 'Joe',
+})
+
+db.sql('users.fetch', {
+   name: 'Joe',
+})
+
+db.sql('users.create', {
+       ~~~~~~~~~~~~~~ [missing-sql-file-2]
+   name: 'Joe',
+})
+
+db.sql('fetch_user', {
+   name: 'Joe',
+})
+
+
+[missing-sql-file-1]: No SQL file found for [fetch_user_by_name].
+[missing-sql-file-2]: No SQL file found for [users.create].
