@@ -21,7 +21,6 @@ export function forEachTinySqlCall(ctx: Lint.WalkContext<void>, onSqlCall: onSql
 
             onSqlCall(sql_call_name, call_expression)
          }
-
       }
       // Wondering why return is used below? Refer to "Make use of tail calls"
       return ts.forEachChild(node, cb) // recurse deeper

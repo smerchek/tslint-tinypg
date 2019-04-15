@@ -23,8 +23,9 @@ function walk(ctx: Lint.WalkContext<void>): void {
 
       const object_literal_exp = call_expression.arguments[1] as ts.ObjectLiteralExpression
 
-      const assigned_object_properties = object_literal_exp.properties
-         .filter(x => x.kind === ts.SyntaxKind.PropertyAssignment || x.kind === ts.SyntaxKind.ShorthandPropertyAssignment) as ts.PropertyAssignment[]
+      const assigned_object_properties = object_literal_exp.properties.filter(
+         x => x.kind === ts.SyntaxKind.PropertyAssignment || x.kind === ts.SyntaxKind.ShorthandPropertyAssignment
+      ) as ts.PropertyAssignment[]
 
       if (file) {
          const contents = fs.readFileSync(file)
@@ -47,4 +48,3 @@ function walk(ctx: Lint.WalkContext<void>): void {
 
    return forEachTinySqlCall(ctx, hook)
 }
-

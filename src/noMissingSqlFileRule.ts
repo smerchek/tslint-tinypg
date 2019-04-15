@@ -27,4 +27,3 @@ function walk(ctx: Lint.WalkContext<void>): void {
 
    return forEachTinySqlCall(ctx, hook)
 }
-
