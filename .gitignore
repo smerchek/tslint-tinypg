@@ -2,6 +2,6 @@
 thumbs.db
 *.log
 node_modules/
-rules/*.js
+rules/
 **/*.js.map
 src/**/*.js

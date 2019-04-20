@@ -14,7 +14,7 @@
       "noImplicitReturns": true,
       "preserveConstEnums": true,
       "strict": true,
-      "strictNullChecks": false,
+      "strictNullChecks": true,
       "outDir": "./rules"
    },
    "include": ["src/**/*"]
