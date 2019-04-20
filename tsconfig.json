@@ -1,35 +1,21 @@
 {
-  "compilerOptions": {
-    // Coding style
-    "forceConsistentCasingInFileNames": true,
-    "newLine": "LF",
-    "noEmitOnError": true,
-    "moduleResolution": "node",
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": false,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "strictNullChecks": true,
-    // Output
-    "module": "commonjs",
-    "target": "es5",
-    "sourceMap": false,
-    "outDir": "rules",
-    "lib": [
-      "es2015",
-      "dom"
-    ]
-  },
-  "filesGlob": [
-      "src/**/*.ts",
-      "typings/**/*.ts",
-      "!./node_modules/**/*.ts"
-   ],
-   "exclude": [
-      "node_modules",
-      ".vscode",
-      "release"
-   ]
+   "compilerOptions": {
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "target": "es6",
+      "sourceMap": true,
+      "moduleResolution": "node",
+      "noFallthroughCasesInSwitch": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "pretty": true,
+      "allowJs": false,
+      "removeComments": true,
+      "noImplicitReturns": true,
+      "preserveConstEnums": true,
+      "strict": true,
+      "strictNullChecks": false,
+      "outDir": "./rules"
+   },
+   "include": ["src/**/*"]
 }

@@ -4,7 +4,7 @@ import * as globby from 'globby'
 import * as _ from 'lodash'
 import { forEachTinySqlCall } from './util'
 import * as fs from 'fs'
-import * as TinyPg from 'tinypg'
+import { parseSql } from 'tinypg-parser'
 
 export class Rule extends Lint.Rules.AbstractRule {
    public apply(sourceFile: ts.SourceFile): Lint.RuleFailure[] {
@@ -13,7 +13,7 @@ export class Rule extends Lint.Rules.AbstractRule {
 }
 
 function walk(ctx: Lint.WalkContext<void>): void {
-   const hook = (sql_call_name, call_expression) => {
+   const hook = (sql_call_name: string, call_expression: ts.CallExpression) => {
       const tiny_file_path = `${sql_call_name.replace(/\./g, '/')}.sql`
       const file = globby.sync([`**/*/${tiny_file_path}`])[0]
 
@@ -30,7 +30,7 @@ function walk(ctx: Lint.WalkContext<void>): void {
       if (file) {
          const contents = fs.readFileSync(file)
 
-         const parsed_file = TinyPg.parseSql(contents.toString())
+         const parsed_file = parseSql(contents.toString())
 
          const unused_properties = assigned_object_properties.filter(p => {
             return !parsed_file.mapping.some(x => x.name === p.name.getText())

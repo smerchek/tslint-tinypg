@@ -1,44 +1,46 @@
 {
-  "name": "tslint-tinypg",
-  "version": "1.0.0-alpha-1",
-  "description": "TSLint rules to disable mutation in TypeScript.",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/smerchek/tslint-tinypg.git"
-  },
-  "keywords": [
-    "tslint",
-    "tinypg",
-    "postgres",
-    "sql"
-  ],
-  "author": "Scott Smerchek",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/smerchek/tslint-tinypg/issues"
-  },
-  "homepage": "https://github.com/smerchek/tslint-tinypg#readme",
-  "devDependencies": {
-    "@types/lodash": "^4.14.64",
-    "@types/node": "^7.0.18",
-    "shelljs": "^0.7.5",
-    "tslint": "^5.1.0",
-    "typescript": "2.3.2"
-  },
-  "scripts": {
-    "tsc": "tsc",
-    "build": "rm -rf rules && tsc -p tsconfig.json",
-    "lint": "tslint './src/**/*.ts{,x}'",
-    "test": "yarn build && yarn test:rules",
-    "test:rules": "./scripts/test-rules.sh",
-    "publish:major": "npm run build && node scripts/publish.js major",
-    "publish:minor": "npm run build && node scripts/publish.js minor",
-    "publish:patch": "npm run build && node scripts/publish.js patch"
-  },
-  "dependencies": {
-    "globby": "^6.1.0",
-    "lodash": "^4.17.4",
-    "tinypg": "^2.0.0-alpha.17"
-  }
+   "name": "tslint-tinypg",
+   "version": "2.0.0",
+   "description": "TSLint rules for TinyPg.",
+   "main": "index.js",
+   "files": [
+      "rules/**/*"
+   ],
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/smerchek/tslint-tinypg.git"
+   },
+   "keywords": [
+      "tslint",
+      "tinypg",
+      "postgres",
+      "sql"
+   ],
+   "author": "Scott Smerchek",
+   "license": "MIT",
+   "bugs": {
+      "url": "https://github.com/smerchek/tslint-tinypg/issues"
+   },
+   "homepage": "https://github.com/smerchek/tslint-tinypg#readme",
+   "devDependencies": {
+      "@types/lodash": "^4.14.64",
+      "@types/node": "^11.13.4",
+      "shelljs": "^0.8.3",
+      "tslint": "^5.1.0",
+      "typescript": "3.4.3"
+   },
+   "scripts": {
+      "build": "rm -rf rules && tsc",
+      "lint": "tslint --project tsconfig.json './src/**/*.ts'",
+      "pretest": "npm run build",
+      "test": "tslint --test test/rules/**/tslint.json",
+      "publish:major": "npm run build && node scripts/publish.js major",
+      "publish:minor": "npm run build && node scripts/publish.js minor",
+      "publish:patch": "npm run build && node scripts/publish.js patch"
+   },
+   "dependencies": {
+      "globby": "^9.2.0",
+      "lodash": "^4.17.4",
+      "tinypg-parser": "^1.0.4"
+   }
 }
