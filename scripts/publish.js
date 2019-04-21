@@ -9,8 +9,8 @@ if (!semverType || !semverType.match(/^(major|minor|patch)$/)) {
 }
 
 execCommand(`npm version ${semverType}`)
-execCommand(`yarn run build`)
-execCommand(`yarn run test:rules`)
+execCommand(`npm run build`)
+execCommand(`npm run test:rules`)
 execCommand(`git push`)
 execCommand(`git push --tags`)
 execCommand(`npm publish`)
