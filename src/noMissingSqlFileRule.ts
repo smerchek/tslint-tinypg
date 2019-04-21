@@ -13,7 +13,7 @@ export class Rule extends Lint.Rules.AbstractRule {
 function walk(ctx: Lint.WalkContext<void>): void {
    const tinySqlFiles: string[] = globby.sync(['**/*.sql', '!**/node_modules/**'])
 
-   const hook = (sql_call_name, call_expression) => {
+   const hook = (sql_call_name: string, call_expression: ts.CallExpression) => {
       const tiny_file_path = `${sql_call_name.replace(/\./g, '/')}.sql`
 
       if (!_.some(tinySqlFiles, x => _.includes(x, tiny_file_path))) {

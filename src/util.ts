@@ -2,9 +2,9 @@ import * as ts from 'typescript'
 import * as Lint from 'tslint'
 import * as _ from 'lodash'
 
-type onSqlCallHook = (sql_call_name: string, call_expression: ts.CallExpression) => void
+export type SqlCallHook = (sql_call_name: string, call_expression: ts.CallExpression) => void
 
-export function forEachTinySqlCall(ctx: Lint.WalkContext<void>, onSqlCall: onSqlCallHook): void {
+export function forEachTinySqlCall(ctx: Lint.WalkContext<void>, onSqlCall: SqlCallHook): void {
    const cb = (node: ts.Node): void => {
       if (node && node.kind === ts.SyntaxKind.CallExpression) {
          const call_expression = node as ts.CallExpression
